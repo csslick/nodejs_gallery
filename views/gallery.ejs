@@ -1,0 +1,50 @@
+	<%- include('header') %>
+
+	<div class="container">
+		<div class="row">
+			<% for(fname in files){ 
+				// jpg, png, gif만 표시
+				// 정규표현식: 마지막 확장자/대소문자 무시(i), '| = or'
+				if(files[fname].match(/.jpg$|.png$|.gif/i)){
+			%>		
+			<div class="col-sm-3">	
+				<div class="thumbnail">
+		      <a href="/uploads/<%= files[fname] %>" target="_blank">
+		        <img src="/uploads/<%= files[fname] %>" style="width:100%">
+		        <div class="caption">
+		          <p><%= files[fname] %></p>
+		          <a href="/delete/<%= files[fname] %>" class="text-danger">Delete</a>
+		        </div>
+		      </a>
+		    </div>
+		  </div><!-- end col-md-4 -->  
+			<%		}	// end if
+				} // end for %>
+		</div><!-- end row -->
+
+<!-- 		<ul>
+			<% for(fname in files){ 
+				// jpg, png, gif만 표시
+				// 정규표현식: 마지막 확장자/대소문자 무시(i), '| = or'
+				if(files[fname].match(/.jpg$|.png$|.gif/i)){
+			%>
+			<li>
+				<img width="300" src="/uploads/<%= files[fname] %>"><br>
+				<%= files[fname] %>
+			</li>
+			<%		}	// end if
+				} // end for %>
+		</ul> -->
+	</div><!-- end container -->
+
+	<script>
+		$(function(){
+			$('.caption a').click(function(){
+				var q = confirm('Are you want to delete?');
+				if(!q){ return false;}
+			});
+		});
+	</script>
+
+</body>
+</html>
